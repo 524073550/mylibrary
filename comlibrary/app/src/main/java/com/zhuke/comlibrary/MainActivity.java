@@ -1,32 +1,50 @@
 package com.zhuke.comlibrary;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.TextView;
 
 import com.zhuke.comlibrary.base.BaseActivity;
-import com.zhuke.comlibrary.utils.RXCountDownTimeUtils;
+import com.zhuke.comlibrary.bean.A;
+import com.zhuke.comlibrary.bean.HttpResult;
+import com.zhuke.comlibrary.bean.LoginBean;
+import com.zhuke.comlibrary.bean.UserEntity;
+import com.zhuke.comlibrary.http.RetrofitManage;
+import com.zhuke.comlibrary.http.Subscriber.BaseDataSubscriber;
+import com.zhuke.comlibrary.http.Interceptor.Transformer;
+import com.zhuke.comlibrary.http.Subscriber.CommonObserver;
+import com.zhuke.comlibrary.http.Subscriber.ProgressSubscriber;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
+import java.util.HashMap;
+
+import io.reactivex.disposables.Disposable;
 
 
 public class MainActivity extends BaseActivity {
-
-
-    @BindView(R.id.qqqq)
-    TextView mQqqq;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
-        RXCountDownTimeUtils.getIntescens().strtCountDown(mQqqq,60,this);
+//        RXCountDownTimeUtils.getIntescens().strtCountDown(mQqqq, 60, this);
+        ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("加载中....");
+        RetrofitManage.getInstance().getService().setPass(new HashMap<String, Object>())
+                .compose(Transformer.<UserEntity>switchSchedulers(progressDialog))
+                .subscribe(new CommonObserver<UserEntity>(progressDialog) {
+                    @Override
+                    protected void onError(String errorMsg) {
+
+                    }
+
+                    @Override
+                    protected void onSuccess(UserEntity userEntity) {
+
+                    }
+                });
     }
 
     @Override
@@ -53,9 +71,9 @@ public class MainActivity extends BaseActivity {
     }
 
 
-    @OnClick(R.id.qqqq)
     public void onViewClicked() {
         showToast("aaa");
-        RXCountDownTimeUtils.getIntescens().strtCountDown(mQqqq,60,this);
+//        RXCountDownTimeUtils.getIntescens().strtCountDown(mQqqq, 60, this);
     }
+
 }

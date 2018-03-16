@@ -5,20 +5,16 @@ import android.graphics.Color;
 import android.widget.TextView;
 import com.zhuke.comlibrary.R;
 import java.util.concurrent.TimeUnit;
-import rx.Observable;
-import rx.Observer;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action;
-import rx.functions.Action0;
-import rx.functions.Func1;
-import rx.schedulers.Schedulers;
+
+import io.reactivex.Observable;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by 15653 on 2018/3/12.
  */
 
 public class RXCountDownTimeUtils {
-    private long mMillisInFuture = 60;
+  /*  private long mMillisInFuture = 60;
     private static RXCountDownTimeUtils mRXCountDownTimeUtils;
 
 
@@ -64,5 +60,5 @@ public class RXCountDownTimeUtils {
                         textView.setText("倒计时" + aLong +"s");
                     }
                 });
-    }
+    }*/
 }

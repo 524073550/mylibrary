@@ -25,6 +25,12 @@ import com.zhuke.comlibrary.utils.DisplayUtil;
 import com.zhuke.comlibrary.utils.MyToast;
 import com.zhuke.comlibrary.utils.StatusBarUtils;
 
+import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
+import io.reactivex.ObservableTransformer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+
 /**
  * Created by 15653 on 2017/9/28.
  */
@@ -81,6 +87,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         toast.setGravity(Gravity.TOP, 0, DisplayUtil.getMobileHeight(getApplicationContext()) / 2);
         toast.show();
     }
+
     protected ProgressDialog progressBar;
 
     protected void showProgressBar(String message) {
@@ -228,4 +235,5 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         ActivityUtils.removeActivity(this);
         super.onDestroy();
     }
+
 }
